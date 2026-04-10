@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camomis AI Factory | Command Center</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar: Agentes -->
+        <aside class="sidebar">
+            <div class="logo">
+                <span class="logo-icon">💠</span>
+                <h1>Camomis</h1>
+                <p>AI Factory</p>
+            </div>
+            
+            <nav class="agent-list">
+                <h3>EQUIPE ATIVA</h3>
+                <div class="agent-card" id="agent-ba">
+                    <div class="pulse"></div>
+                    <div class="agent-info">
+                        <h4>Analista de Negócios</h4>
+                        <span>Status: <i class="status">Ocioso</i></span>
+                    </div>
+                </div>
+                <div class="agent-card" id="agent-pm">
+                    <div class="pulse"></div>
+                    <div class="agent-info">
+                        <h4>Product Manager</h4>
+                        <span>Status: <i class="status">Ocioso</i></span>
+                    </div>
+                </div>
+                <div class="agent-card" id="agent-arquiteto">
+                    <div class="pulse"></div>
+                    <div class="agent-info">
+                        <h4>Tech Lead</h4>
+                        <span>Status: <i class="status">Ocioso</i></span>
+                    </div>
+                </div>
+                <div class="agent-card" id="agent-ux">
+                    <div class="pulse"></div>
+                    <div class="agent-info">
+                        <h4>UX Designer</h4>
+                        <span>Status: <i class="status">Ocioso</i></span>
+                    </div>
+                </div>
+                <div class="agent-card" id="agent-dev">
+                    <div class="pulse"></div>
+                    <div class="agent-info">
+                        <h4>Dev Senior</h4>
+                        <span>Status: <i class="status">Ocioso</i></span>
+                    </div>
+                </div>
+                <div class="agent-card" id="agent-qa">
+                    <div class="pulse"></div>
+                    <div class="agent-info">
+                        <h4>QA Automador</h4>
+                        <span>Status: <i class="status">Ocioso</i></span>
+                    </div>
+                </div>
+                <div class="agent-card" id="agent-doc">
+                    <div class="pulse"></div>
+                    <div class="agent-info">
+                        <h4>Tech Writer</h4>
+                        <span>Status: <i class="status">Ocioso</i></span>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="quota-explorer">
+                <h3>API QUOTA EXPLORER</h3>
+                <div class="quota-meters">
+                    <div class="meter-item">
+                        <div class="meter-label">
+                            <span>RPM (Minuto)</span>
+                            <span id="rpm-val">0 / 15</span>
+                        </div>
+                        <div class="meter-bar"><div id="rpm-fill" class="fill" style="width: 0%"></div></div>
+                    </div>
+                    <div class="meter-item">
+                        <div class="meter-label">
+                            <span>RPD (Diário)</span>
+                            <span id="rpd-val">0 / 1500</span>
+                        </div>
+                        <div class="meter-bar"><div id="rpd-fill" class="fill" style="width: 0%"></div></div>
+                    </div>
+                </div>
+                <div class="quota-alert" id="quota-msg">SISTEMA DENTRO DOS LIMITES</div>
+            </div>
+        </aside>
+
+        <!-- Main: Console e Comandos -->
+        <main class="main-content">
+            <header class="main-header">
+                <h2>CENTRO DE COMANDO</h2>
+                <div class="system-status">SISTEMA ONLINE</div>
+            </header>
+
+            <section class="console-area">
+                <div id="log-container" class="log-window">
+                    <div class="log-entry system">Iniciando interface de comando Camomis AI Factory...</div>
+                    <div class="log-entry system">Aguardando instruções do usuário...</div>
+                </div>
+                
+                <div class="command-input-container">
+                    <textarea id="command-input" placeholder="O que deseja que a Camomis AI Factory construa hoje?"></textarea>
+                    <button id="send-btn">INICIAR MISSÃO</button>
+                </div>
+            </section>
+        </main>
+
+        <!-- Right: Code & Preview -->
+        <aside class="right-panel">
+            <div class="panel-header">
+                <h3>INSPEÇÃO DE PROJETO</h3>
+            </div>
+            
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="mockups">MOCKUPS</button>
+                <button class="tab-btn" data-tab="code">CÓDIGO</button>
+            </div>
+
+            <div class="tab-content" id="mockups-content">
+                <div class="mockup-empty">
+                    <span>Nenhum protótipo gerado ainda.</span>
+                    <p>O Designer de UX enviará visualizações aqui.</p>
+                </div>
+            </div>
+
+            <div class="tab-content hidden" id="code-content">
+                <div class="code-viewer">
+                    <pre><code id="code-display">Selecione um arquivo para ler...</code></pre>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

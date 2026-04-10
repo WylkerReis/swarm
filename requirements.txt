@@ -1,0 +1,8 @@
+crewai>=0.28.0
+fastapi
+uvicorn
+python-dotenv
+tenacity
+pydantic
+langchain
+google-generativeai

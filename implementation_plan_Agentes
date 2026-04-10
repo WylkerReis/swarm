@@ -1,0 +1,43 @@
+# Implementação: Fábrica de Software Multi-Agentes (Python/CrewAI)
+
+Este plano descreve a arquitetura final e os deveres do sistema autônomo baseado em CrewAI. A equipe realiza um fluxo contínuo em `d:\Agente`, do requisito do usuário até a arquitetura, construção de código, testes (BDD) e documentação, com loop interativo em tela.
+
+## Arquitetura do Processo Sequencial
+
+Para atingir a eficiência de uma *Software House* de alta performance, utilizamos 7 personas autônomas em um fluxo provido de triplo gatekeeping humano:
+
+1. **Business Analyst (BA)**
+   - **Objetivo**: Elicitar requisitos primários, resolver conflitos lógicos e de legado.
+   - **Mecânica**: Passou a ser equipado com uma *Ferramenta de Leitura local*. Ele mapeia passivamente os arquivos que o *Technical Writer* redigiu no último deploy. Caso o novo pedido do usuário gere choque grave estrutural nas features antigas, ele aciona interrupção do sistema (`ask_human_tool`) para forçar um debate estratégico com você a respeito de "Qual caminho devemos tomar com essa feature em vista da restrição XYZ?", consolidando as opções até um veredito seu de negócios.
+
+2. **Product Manager (PM)**
+   - **Objetivo**: Estruturação formal do projeto.
+   - **Mecânica**: Consome a entrevista e o briefing saneado de conflitos do BA, convertendo tudo rigorosamente para User Stories sólidas.
+
+3. **Technical Lead / Arquiteto**
+   - **Objetivo**: Governança Técnica, Entidades e Mapas Visuais.
+   - **Mecânica**: Modela diretórios lógicos e produz ativamente Mapas Visuais para estruturação complexa de Banco de Dados (ex: usando grafos e UML para o Writer).
+
+4. **UX/UI Designer**
+   - **Objetivo**: Aprovação de Protótipo e Governança Visual.
+   - **Mecânica**: Traz a especificação base. Com o `human_input=True`, trava-se o terminal com suas sugestões de Wireframe. Caso discordamos das paletas ou grid, o loop nos permite criticar até obtermos um visual acurado.
+
+5. **Senior Developer**
+   - **Objetivo**: Materialização do código.
+   - **Mecânica**: Materializa sem corromper as leis escritas anteriormente pelos outros agentes e pelo Designer. Trabalha no modelo File-System Write direto para o HD.
+
+6. **QA Engineer / Test Automation Architect**
+   - **Objetivo**: Auditar, aplicar *Shift-Left Testing*, e versionar.
+   - **Mecanica**: Realiza *Shift-Left Testing*, desenhando Planos de Teste Estruturados (BDD e Gherkin) e validando APIs logicamente contra a documentação original. Quando aprova sua própria engenharia, paralisa o mundo exibindo alerta local para pedirmos o "Ok" final na injeção do Git Commit.
+
+7. **Technical Writer**
+   - **Objetivo**: Manter a Verdade Oficial do Sistema Centralizada.
+   - **Mecânica**: Mapeia compulsivamente os diagramas, os planos de teste (GHERKIN), e documenta 100% dos requisitos pós-deploy e pós-conflito no README mestre, alimentando a base para o próprio BA ler na próxima Feature Request.
+
+## Componentes Técnicos (`d:\Agente`)
+
+- `main.py`, `agents.py`, `tasks.py`, `tools.py` compõem a espinha dorsal lógica do workflow interligando prompts com scripts de file system locais e subprocessos customizáveis no Windows.
+
+> [!CAUTION]
+> **User Review Required**
+> As atualizações do Analista de Requisitos como Validador Ativo contra o Technical Writer foram alocadas e registradas. As portas de Input humano garantem que nenhuma decisão abstrata do LLM prevaleça numa repaginada agressiva do software se ele entrar em conflito. Caso você valide formalmente todo esse escopo listado no item 1, a fase de orquestração arquitetural atinge sua excelência!
