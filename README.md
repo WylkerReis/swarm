@@ -1,56 +1,48 @@
 # 💠 Camomis AI Factory
 
-A advanced software engineering factory powered by a 7-agent CrewAI team and Gemini LLMs. Featuring a high-fidelity NASA-inspired Glassmorphism Dashboard.
+A professionalized software engineering factory powered by a 7-agent CrewAI team and Gemini LLMs. Featuring a high-fidelity NASA-inspired Glassmorphism Dashboard.
 
 ## 🚀 Overview
 
-Camomis AI Factory automates the full software development lifecycle (SDLC) using specialized AI agents that collaborate to translate user requirements into functional code, mockups, and documentation.
+Camomis AI Factory automates the full software development lifecycle (SDLC) using specialized AI agents.
 
-### 🤖 The Agent Team
+## ⚙️ How to Run
 
-- **Business Analyst**: Analyzes user requests and audits documentation.
-- **Product Manager**: Extraction of business requirements and acceptance criteria.
-- **Tech Lead**: Architectural design and database mapping.
-- **UX Designer**: Generates visual mockups (NASA/Glassmorphism style).
-- **Senior Developer**: Implements clean, SOLID-compliant code.
-- **QA Engineer**: Automated testing (API + UI) and BDD validation.
-- **Technical Writer**: Maintains the "living documentation" wiki.
+Since the project is now modularized, use the unified entry point **`main.py`**:
 
-## 🛠️ Stack
+### 🌐 Web Dashboard (Recommended)
+This launches the FastAPI server and opens your browser automatically.
+```bash
+.\venv\Scripts\python.exe main.py --ui
+```
 
-- **Backend**: Python, FastAPI, Uvicorn.
-- **AI Orchestration**: CrewAI (Sequential Process).
-- **LLMs**: Google Gemini (3 Flash & 1.5 Flash) with proactive fallback systems.
-- **Frontend**: HTML5, Vanilla CSS (NASA Aesthetic), Javascript (SSE for real-time logs).
+### 💻 Terminal Factory (CLI)
+Run the loop directly in your terminal.
+```bash
+.\venv\Scripts\python.exe main.py
+```
 
-## ⚙️ Setup
+### 🔍 Diagnostic Mode
+Check which Gemini models are available for your API Key.
+```bash
+.\venv\Scripts\python.exe main.py --check
+```
 
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/WylkerReis/Agente.git
-   cd Agente
-   ```
+---
 
-2. **Environment Variables**:
-   Create a `.env` file with your Gemini API Key:
-   ```env
-   GEMINI_API_KEY=your_key_here
-   ```
+## 🛠️ Project Structure (Modular)
 
-3. **Install Dependencies**:
+- **`app/core/`**: The "brain" of the factory (Agents, Tasks, Tools, and Crew Manager).
+- **`app/api/`**: The FastAPI server logic.
+- **`app/utils/`**: Maintenance and diagnostic scripts.
+- **`public/`**: Frontend assets (HTML, CSS, JS).
+- **`main.py`**: Unified entry point for all operations.
+
+## 🛰️ Setup
+
+1. **Environment**:
+   Ensure you have a `.env` file with your `GEMINI_API_KEY`.
+2. **Dependencies**:
    ```bash
    pip install -r requirements.txt
    ```
-
-4. **Run the Factory**:
-   ```bash
-   python server.py
-   ```
-   The dashboard will automatically open at `http://localhost:8000`.
-
-## 🛰️ Dashboard Features
-
-- **Real-time Logs**: SSE-powered terminal visualization with friendly status updates.
-- **Resilient Motors**: Automatic transition between LLMs during quota exhaustion (429 errors).
-- **Code Viewer**: Integrated viewer for files generated during the cycle.
-- **Visual Mockups**: Real-time rendering of UI prototypes.
