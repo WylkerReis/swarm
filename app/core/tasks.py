@@ -1,5 +1,6 @@
 from crewai import Task
 from app.core.tools import write_file_tool, read_file_tool, git_commit_tool, ask_human_tool
+from app.core.output_checks import architecture_problems, as_guardrail, gherkin_problems, product_problems
 
 def create_ba_task(agent, user_request):
     return Task(
@@ -14,7 +15,8 @@ def create_pm_task(agent, ba_task):
         description="Analise o briefing estruturado pelo Business Analyst. Descreva as features essenciais em user stories e liste os critérios de aceite.",
         expected_output="Documento Markdown detalhando as user stories, requisitos funcionais e técnicos.",
         agent=agent,
-        context=[ba_task]
+        context=[ba_task],
+        guardrail=as_guardrail(product_problems),
     )
 
 def create_arch_task(agent, pm_task):
@@ -22,7 +24,8 @@ def create_arch_task(agent, pm_task):
         description="Baseado na documentação do PM, escolha a stack, defina modelos de dados e estrutura de pastas. Projete e crie explicitamente um Mapa Visual Diagramado (utilizando sintaxe como Mermaid.js ou UML textual) contendo todos os relacionamentos e entidades do Banco de Dados que será utilizado no software.",
         expected_output="Documento arquitetural com stack definida, estrutura de árvore das pastas e um Mapa Visual explícito ilustrando a estruturação do Banco de Dados para compor a documentação final.",
         agent=agent,
-        context=[pm_task]
+        context=[pm_task],
+        guardrail=as_guardrail(architecture_problems),
     )
 
 def create_ux_task(agent, arch_task):
@@ -50,7 +53,8 @@ def create_qa_task(agent, dev_task):
         agent=agent,
         tools=[read_file_tool, write_file_tool, git_commit_tool], # Ganhando write_file_tool para criar arquivos de teste
         human_input=True, # Magicamente pausa a Crew para revisão humana do QA!
-        context=[dev_task]
+        context=[dev_task],
+        guardrail=as_guardrail(gherkin_problems),
     )
 
 def create_docs_task(agent, qa_task):
