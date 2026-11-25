@@ -7,7 +7,7 @@ import threading
 import webbrowser
 from queue import Queue, Empty
 from fastapi import FastAPI, Request, BackgroundTasks
-from fastapi.responses import StreamingResponse
+from fastapi.responses import JSONResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.crew_manager import get_crew_config, create_crew_tasks
@@ -172,10 +172,13 @@ async def run_factory(request: Request, background_tasks: BackgroundTasks):
 
 @app.get("/files/{file_path:path}")
 async def get_file(file_path: str):
-    if os.path.exists(file_path):
-        with open(file_path, "r", encoding="utf-8") as f:
-            return {"content": f.read()}
-    return {"error": "File not found"}
+    root = os.path.realpath(os.getcwd())
+    path = os.path.realpath(os.path.join(root, file_path))
+    # Só serve arquivos dentro da pasta do projeto (bloqueia caminhos absolutos e '..').
+    if os.path.commonpath([root, path]) != root or not os.path.isfile(path):
+        return JSONResponse({"error": "File not found"}, status_code=404)
+    with open(path, "r", encoding="utf-8") as f:
+        return {"content": f.read()}
 
 # Servir o Dashboard a partir da pasta 'public'
 if os.path.exists("public"):

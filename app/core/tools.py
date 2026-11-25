@@ -6,7 +6,7 @@ from crewai.tools import tool
 @tool("write_file_tool")
 def write_file_tool(file_path: str, content: str) -> str:
     """Escreve código fonte em um arquivo local na máquina do usuário. Pode criar ou reescrever."""
-    os.makedirs(os.path.dirname(file_path), exist_ok=True)
+    os.makedirs(os.path.dirname(file_path) or ".", exist_ok=True)
     with open(file_path, "w", encoding="utf-8") as f:
         f.write(content)
     return f"Arquivo '{file_path}' escrito com sucesso."
@@ -21,7 +21,7 @@ def read_file_tool(file_path: str) -> str:
 
 @tool("git_commit_tool")
 def git_commit_tool(message: str) -> str:
-    """Faz um commit Git. Usa 'git add .' seguido do commit. SEMPRE solicita autorização humana."""
+    """Faz um commit Git ('git add .' seguido do commit). No modo Dashboard o commit é aprovado automaticamente, sem revisão humana."""
     print(f"\n────────────────────────────────────────────────────────")
     print(f"[ALERTA DE SEGURANÇA] O agente solicitou um GIT COMMIT.")
     print(f"Mensagem do Commit: '{message}'")
@@ -41,9 +41,8 @@ def git_commit_tool(message: str) -> str:
 
 @tool("ask_human_tool")
 def ask_human_tool(question: str) -> str:
-    """Faz uma pergunta diretamente ao usuário humano no terminal para coletar e esclarecer requisitos."""
+    """Registra uma pergunta ao usuário. No modo Dashboard não há resposta humana: a ferramenta devolve uma resposta padrão para o agente seguir."""
     print(f"\n────────────────────────────────────────────────────────")
-    print(f"[Analista de Requisitos] {question}")
     print(f"[Analista de Requisitos] {question}")
     user_response = "Entendido. Prossiga com a melhor implementação técnica seguindo os requisitos discutidos."
     print(f"────────────────────────────────────────────────────────\n")

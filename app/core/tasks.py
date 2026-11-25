@@ -1,5 +1,5 @@
 from crewai import Task
-from tools import write_file_tool, read_file_tool, git_commit_tool, ask_human_tool
+from app.core.tools import write_file_tool, read_file_tool, git_commit_tool, ask_human_tool
 
 def create_ba_task(agent, user_request):
     return Task(
